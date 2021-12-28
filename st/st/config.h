@@ -227,9 +227,9 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
-static char *openurlcmd[] = { "/bin/sh", "-c", "/home/cyberpunk/Documents/Repos/my_st/tools/st-urlhandler -o", "externalpipe", NULL };
-static char *copyurlcmd[] = { "/bin/sh", "-c", "/home/cyberpunk/Documents/Repos/my_st/tools/st-urlhandler -c", "externalpipe", NULL };
-static char *copyoutput[] = { "/bin/sh", "-c", "/home/cyberpunk/Documents/Repos/my_st/tools/st-copyout", "externalpipe", NULL };
+static char *openurlcmd[] = { "/bin/sh", "-c", "~/Documents/Repos/suck_less/st/tools/st-urlhandler -o", "externalpipe", NULL };
+static char *copyurlcmd[] = { "/bin/sh", "-c", "~/Documents/Repos/suck_less/st/tools/st-urlhandler -c", "externalpipe", NULL };
+static char *copyoutput[] = { "/bin/sh", "-c", "~/Documents/Repos/suck_less/st/tools/st-copyout", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
