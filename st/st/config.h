@@ -5,8 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Hermit:pixelsize=15:antialias=true:autohint=true";
+static char *font = "Hack Nerd Font:pixelsize=15:antialias=true:autohint=true";
+/*static char *font = "Hermit:pixelsize=15:antialias=true:autohint=true";
 static char *font2[] = { "Hack Nerd Font:pixelsize=15:antialias=true:autohint=true" };
+*/
 static int borderpx = 2;
 
 /*
@@ -227,9 +229,9 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
-static char *openurlcmd[] = { "/bin/sh", "-c", "~/Documents/Repos/suck_less/st/tools/st-urlhandler -o", "externalpipe", NULL };
-static char *copyurlcmd[] = { "/bin/sh", "-c", "~/Documents/Repos/suck_less/st/tools/st-urlhandler -c", "externalpipe", NULL };
-static char *copyoutput[] = { "/bin/sh", "-c", "~/Documents/Repos/suck_less/st/tools/st-copyout", "externalpipe", NULL };
+static char *openurlcmd[] = { "/bin/sh", "-c", "$HOME/.config/st/st-urlhandler -o", "externalpipe", NULL };
+static char *copyurlcmd[] = { "/bin/sh", "-c", "$HOME/.config/st/st-urlhandler -c", "externalpipe", NULL };
+static char *copyoutput[] = { "/bin/sh", "-c", "$HOME/.config/st/st-copyout", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
