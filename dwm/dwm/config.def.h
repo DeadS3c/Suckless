@@ -102,7 +102,6 @@ ResourcePref resources[] = {
 };
 
 #include <X11/XF86keysym.h>
-#include "shiftview.c"
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
