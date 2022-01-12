@@ -10,9 +10,9 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static char font[]                  = "monospace:size=10";
+static char font[]            = "monospace:size=10";
+static char dmenufont[]       = "monospace:size=10";
 static const char *fonts[]          = { font };
-static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -63,7 +63,7 @@ static const Layout layouts[] = {
 #define STACKKEYS(MOD,ACTION) \
 	{ MOD, XK_j,     ACTION##stack, {.i = INC(+1) } }, \
 	{ MOD, XK_k,     ACTION##stack, {.i = INC(-1) } }, \
-	{ MOD, XK_v,     ACTION##stack, {.i = 0 } }, \
+	{ MOD, XK_z,     ACTION##stack, {.i = 0 } }, \
 	/* { MOD, XK_grave, ACTION##stack, {.i = PREVSEL } }, \ */
 	/* { MOD, XK_q,     ACTION##stack, {.i = 0 } }, \ */
 	/* { MOD, XK_a,     ACTION##stack, {.i = 1 } }, \ */
@@ -105,7 +105,7 @@ ResourcePref resources[] = {
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	STACKKEYS(MODKEY,                          focus)
@@ -114,35 +114,40 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  zoom,           {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_s,      togglesticky,   {0} },
-	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
-    { MODKEY,			            XK_e,	   spawn,		   SHCMD(TERMINAL " -e ranger") },
-    { MODKEY|ShiftMask,			    XK_e,	   spawn,		   SHCMD(TERMINAL " -e htop") },
-    { MODKEY,			            XK_m,	   spawn,		   SHCMD(TERMINAL " -e ncmpcpp") },
+	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
     { MODKEY,			            XK_w,	   spawn,		   SHCMD("qutebrowser") },
-    { MODKEY|ShiftMask,			    XK_w,	   spawn,		   SHCMD(TERMINAL " -e sudo nmtui") },
+	{ MODKEY|ShiftMask,		        XK_w,	   spawn,		   SHCMD(TERMINAL " -e sudo nmtui") },
+	{ MODKEY,			            XK_e,	   spawn,		   SHCMD(TERMINAL " -e ranger") },
+	{ MODKEY|ShiftMask,		        XK_e,	   spawn,		   SHCMD(TERMINAL " -e htop") },
+	{ MODKEY,			            XK_n,	   spawn,		   SHCMD(TERMINAL " -e ncmpcpp") },
+	{ MODKEY|ShiftMask,		        XK_n,	   spawn,		   SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
     { MODKEY,			            XK_comma,  spawn,		   SHCMD("mpc prev") },
-    { MODKEY|ShiftMask,			    XK_comma,  spawn,		   SHCMD("mpc seek 0%") },
-    { MODKEY,			            XK_period, spawn,		   SHCMD("mpc next") },
-    { MODKEY|ShiftMask,			    XK_period, spawn,		   SHCMD("mpc repeat") },
-    { MODKEY,			            XK_p,      spawn,		   SHCMD("mpc toggle") },
-    { MODKEY,			            XK_minus,	spawn,		   SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		        XK_minus,	spawn,		   SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY,		            	XK_equal,	spawn,		   SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
-	{ MODKEY|ShiftMask,		        XK_equal,	spawn,		   SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		        XK_comma,  spawn,		   SHCMD("mpc seek 0%") },
+	{ MODKEY,			            XK_period, spawn,		   SHCMD("mpc next") },
+	{ MODKEY|ShiftMask,		        XK_period, spawn,		   SHCMD("mpc repeat") },
+    { MODKEY,			            XK_minus,  spawn,		   SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		        XK_minus,  spawn,		   SHCMD("pamixer --allow-boost -d 15; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY,			            XK_equal,  spawn,		   SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
+	{ MODKEY|ShiftMask,		        XK_equal,  spawn,		   SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
+    { MODKEY,			            XK_p,	   spawn,		   SHCMD("mpc toggle") },
+	{ MODKEY|ShiftMask,		        XK_p,	   spawn,		   SHCMD("mpc pause ; pauseallmpv") },
+	{ MODKEY,			            XK_bracketleft,		spawn,		SHCMD("mpc seek -10") },
+	{ MODKEY|ShiftMask,		        XK_bracketleft,		spawn,		SHCMD("mpc seek -60") },
+	{ MODKEY,			            XK_bracketright,	spawn,		SHCMD("mpc seek +10") },
+	{ MODKEY|ShiftMask,		        XK_bracketright,	spawn,		SHCMD("mpc seek +60") },
     { 0, XF86XK_AudioMute,		    spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
     { 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 15") },
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 15") },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_s,      togglesticky,   {0} },
+	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -158,7 +163,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_BackSpace, quit,        {0} },
 };
 
 /* button definitions */

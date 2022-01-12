@@ -1,0 +1,400 @@
+
+
+Tue Jan 11 15:31:59 2022
+Command line: TestDisk
+
+TestDisk 7.1, Data Recovery Utility, July 2019
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Linux, kernel 5.15.13-arch1-1 (#1 SMP PREEMPT Wed, 05 Jan 2022 16:20:59 +0000) x86_64
+Compiler: GCC 11.1
+ext2fs lib: 1.46.5, ntfs lib: libntfs-3g, reiserfs lib: 0.3.0.5, ewf lib: none, curses lib: ncurses 6.2
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/nvme0n1 - 1024 GB / 953 GiB - CHS 976762 64 32, sector size=512
+
+Partition table type (auto): EFI GPT
+Disk /dev/nvme0n1 - 1024 GB / 953 GiB
+Partition table type: EFI GPT
+
+Interface Advanced
+hdr_size=92
+hdr_lba_self=1
+hdr_lba_alt=2000409263 (expected 2000409263)
+hdr_lba_start=2048
+hdr_lba_end=2000409230
+hdr_lba_table=2
+hdr_entries=128
+hdr_entsz=128
+ 1 P EFI System                  2048    2099199    2097152
+ 2 P Linux filesys. data      2099200  211814399  209715200
+ 3 P Linux Swap             211814400  216008703    4194304
+ 4 P Linux filesys. data    216008704 2000409230 1784400527
+
+Analyse Disk /dev/nvme0n1 - 1024 GB / 953 GiB - CHS 976762 64 32
+hdr_size=92
+hdr_lba_self=1
+hdr_lba_alt=2000409263 (expected 2000409263)
+hdr_lba_start=2048
+hdr_lba_end=2000409230
+hdr_lba_table=2
+hdr_entries=128
+hdr_entsz=128
+Current partition structure:
+ 1 P EFI System                  2048    2099199    2097152
+ 2 P Linux filesys. data      2099200  211814399  209715200
+ 3 P Linux Swap             211814400  216008703    4194304
+ 4 P Linux filesys. data    216008704 2000409230 1784400527
+
+search_part()
+Disk /dev/nvme0n1 - 1024 GB / 953 GiB - CHS 976762 64 32
+FAT32 at 1/0/1
+FAT1 : 32-2079
+FAT2 : 2080-4127
+start_rootdir : 4128 root cluster : 2
+Data : 4128-2097151
+sectors : 2097152
+cluster_size : 8
+no_of_cluster : 261628 (2 - 261629)
+fat_length 2048 calculated 2044
+set_FAT_info: name from BS used
+
+FAT32 at 1/0/1
+FAT: cluster=2(0x2), pos=6176
+     EFI System                  2048    2099199    2097152 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 1073 MB / 1024 MiB
+
+recover_EXT2: s_block_group_nr=0/800, s_mnt_count=664/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 26214400
+recover_EXT2: part_size 209715200
+Filesystem created: Sun Dec 27 21:18:46 2020
+Last mount time:    Tue Jan 11 09:48:47 2022
+     Linux filesys. data      2099200  211814399  209715200
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 100 GiB
+     Linux Swap             211814400  216008687    4194288
+     SWAP2 version 1, pagesize=4096, 2147 MB / 2047 MiB
+
+recover_EXT2: s_block_group_nr=0/6806, s_mnt_count=664/4294967295, s_blocks_per_group=32768, s_inodes_per_group=8192
+recover_EXT2: s_blocksize=4096
+recover_EXT2: s_blocks_count 223050065
+recover_EXT2: part_size 1784400520
+Filesystem created: Sun Dec 27 21:19:20 2020
+Last mount time:    Tue Jan 11 09:48:48 2022
+     Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+
+Results
+   P EFI System                  2048    2099199    2097152 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 1073 MB / 1024 MiB
+   P Linux filesys. data      2099200  211814399  209715200
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 100 GiB
+   P Linux Swap             211814400  216008687    4194288
+     SWAP2 version 1, pagesize=4096, 2147 MB / 2047 MiB
+   P Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+
+Hint for advanced users: dmsetup may be used if you prefer to avoid rewriting the partition table for the moment:
+echo "0 2097152 linear /dev/nvme0n1 2048" | dmsetup create test0
+echo "0 209715200 linear /dev/nvme0n1 2099200" | dmsetup create test1
+echo "0 4194288 linear /dev/nvme0n1 211814400" | dmsetup create test2
+echo "0 1784400520 linear /dev/nvme0n1 216008704" | dmsetup create test3
+
+
+dir_partition inode=2
+   P Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+Directory /
+       2 drwxr-xr-x     0      0      4096 27-Dec-2020 21:33 .
+       2 drwxr-xr-x     0      0      4096 27-Dec-2020 21:33 ..
+      11 drwx------     0      0     16384 27-Dec-2020 21:19 lost+found
+ 15466497 drwx--x---  1000   1000      4096 11-Jan-2022 15:14 cyberpunk
+
+dir_partition inode=15466497
+   P Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+Directory /cyberpunk
+ 15466497 drwx--x---  1000   1000      4096 11-Jan-2022 15:14 .
+       2 drwxr-xr-x     0      0      4096 27-Dec-2020 21:33 ..
+ 15466498 -rw-r--r--  1000   1000        57 20-Dec-2020 19:44 .bash_profile
+ 15472755 -rw-r--r--  1000   1000      5836 17-May-2021 07:08 .bashrc
+ 15466500 -rw-r--r--  1000   1000        21 20-Dec-2020 19:44 .bash_logout
+ 15466501 drwxr-xr-x  1000   1000      4096 25-Dec-2021 17:03 Desktop
+ 15466502 drwxr-xr-x  1000   1000      4096 10-Jan-2022 17:44 Downloads
+ 15466503 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:36 Templates
+ 15466504 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:36 Public
+ 15466505 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 Documents
+ 15466506 drwxr-xr-x  1000   1000      4096  7-Jan-2022 13:01 Music
+ 15466507 drwxr-xr-x  1000   1000      4096 24-Apr-2021 17:28 Pictures
+ 15466508 drwxr-xr-x  1000   1000      4096 10-Jan-2022 22:13 Videos
+ 15466509 drwx------  1000   1000      4096 10-Jan-2022 18:52 .config
+ 15466512 -rw-------  1000   1000      7989 13-Dec-2021 21:13 .bash_history
+ 16646869 drwx------  1000   1000      4096 28-Dec-2020 21:18 .icons
+ 15466621 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:45 yay
+ 15466810 drwxr-xr-x  1000   1000      4096  8-Jan-2022 18:40 .cache
+ 15469487 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:49 .subversion
+ 15469491 drwx------  1000   1000      4096 27-Dec-2021 20:10 .local
+ 15469917 drwxr-xr-x  1000   1000      4096  2-Jan-2022 19:31 .vim
+ 15859781 drwxr-xr-x  1000   1000      4096  6-Jan-2022 17:02 .w3m
+ 15475498 -rw-r--r--  1000   1000       815 18-Dec-2021 22:12 .tmux.conf
+ 15470020 -rw-r--r--  1000   1000       538 15-Dec-2021 00:12 .Xresources
+ 15859818 drwxr-xr-x  1000   1000      4096 16-Oct-2021 20:28 backgrounds
+ 15859903 drwxr-xr-x  1000   1000      4096  2-Jan-2021 18:19 go
+ 15470704 -rw-r--r--  1000   1000         0 27-Dec-2020 22:17 .lyxauth
+ 15470718 -rwxr-xr--  1000   1000      1055 11-Jan-2022 15:30 .fehbg
+ 16517568 drwx------  1000   1000      4096 28-Dec-2020 20:33 .mozilla
+ 15470722 -rw-r--r--  1000   1000      1382 28-Dec-2020 20:43 .taskrc
+ 16518048 drwxr-xr-x  1000   1000      4096 28-Dec-2020 21:56 .task
+ 15472981 -rw-------  1000   1000     33613 11-Jan-2022 15:14 .viminfo
+ 15470724 drwxr-xr-x  1000   1000      4096 26-Oct-2021 18:05 .ZAP
+ 16254642 drwxr-xr-x  1000   1000      4096 28-Dec-2020 21:06 .java
+ 16647399 drwx------  1000   1000      4096  2-Jan-2021 16:47 .pki
+ 16777217 drwx------  1000   1000      4096 26-Dec-2021 12:03 .gnupg
+ 15470192 -rw-r--r--  1000   1000       576 20-Mar-2021 23:10 .gtkrc-2.0
+ 16779291 drwxr-xr-x  1000   1000      4096  2-Jan-2021 18:20 .cargo
+ 15472880 -rw-------  1000   1000       647  9-Jan-2022 19:57 .lesshst
+ 16777319 drwxr-xr-x  1000   1000      4096 10-Jan-2022 18:49 VirtualBox VMs
+ 16777343 drwxr-xr-x  1000   1000      4096 11-Jan-2021 15:00 .bully
+ 16777360 drwx------  1000   1000      4096 11-Jan-2021 22:37 .thunderbird
+ 16777735 drwxr-x---  1000   1000      4096 14-Jan-2021 20:16 .android
+ 16777559 drwxr-xr-x  1000   1000      4096 16-Jan-2021 16:46 .Genymobile
+ 16778751 drwxr-xr-x  1000   1000      4096  9-Feb-2021 22:24 .maltego
+ 16778417 drwx------  1000   1000      4096  4-Aug-2021 15:40 .hashcat
+ 16647202 drwx------  1000   1000      4096 19-Dec-2021 04:19 .john
+ 15469781 -rw-------  1000   1000      1033 25-Sep-2021 20:24 .python_history
+ 16778966 drwx------  1000   1000      4096  1-Mar-2021 21:11 .purple
+ 16777666 drwxr-xr-x  1000   1000      4096 15-Mar-2021 20:26 .parallel
+ 15470183 -rw-r--r--  1000   1000       638 11-Jan-2022 10:00 .wget-hsts
+ 19529896 drwx------  1000   1000      4096 20-Mar-2021 00:48 .BurpSuite
+ 16656301 drwx------  1000   1000      4096 23-Mar-2021 17:04 .ngrok2
+ 16656305 drwx------  1000   1000      4096  5-Oct-2021 18:29 .ssh
+ 19661286 drwxr-xr-x  1000   1000      4096 24-Mar-2021 08:26 .beef
+ 15470254 drwxr-xr-x  1000   1000      4096 24-Mar-2021 10:43 .msf4
+ 16123887 drwxr-xr-x  1000   1000      4096 15-Apr-2021 13:19 .wpscan
+ 15471457 drwxr-xr-x  1000   1000      4096 20-Apr-2021 08:23 .node-gyp
+ 15471977 drwxr-xr-x  1000   1000      4096 26-Dec-2021 11:52 .npm
+ 15599227 drwxr-xr-x  1000   1000      4096  2-Jul-2021 16:23 .electron-gyp
+ 16649224 drwxr-xr-x  1000   1000      4096 21-Apr-2021 09:50 .cme
+ 15469131 drwxr-xr-x  1000   1000      4096  5-Oct-2021 18:59 nuclei-templates
+ 15471274 drwxr-xr-x  1000   1000      4096 22-Oct-2021 19:14 .gf
+ 15469946 -rw-------  1000   1000        65  2-Jul-2021 15:54 .npmrc
+ 15469734 -rw-r--r--  1000   1000       839 21-Dec-2021 17:16 .Xresources.bak
+ 15472214 -rw-r--r--  1000   1000    705279  7-Oct-2021 10:00 nuclei_tp_db.json
+ 15476903 drwx------  1000   1000      4096 16-Oct-2021 12:48 .pentadactyl
+ 15473731 -rw-r--r--  1000   1000       139  5-Jul-2021 16:43 index.theme
+ 15473744 -rw-r--r--  1000   1000       281  5-Jul-2021 16:57 .zprofile
+ 15472002 drwx------  1000   1000      4096  3-Nov-2021 10:09 .zoom
+ 15469789 -rw-r-----  1000   1000         0 27-Oct-2021 12:44 .gksu.lock
+ 15470295 drwxr-xr-x  1000   1000      4096  6-Aug-2021 15:10 .recon-ng
+ 15476933 -rw-r--r--  1000   1000       112 16-Oct-2021 12:55 .pentadactylrc
+ 15993764 drwxr-xr-x     0      0      4096  7-Sep-2021 21:03 hs
+ 15476839 drwx------  1000   1000      4096 14-Oct-2021 23:46 .moonchild productions
+ 15473434 -rw-r--r--  1000   1000       157  4-Nov-2021 07:31 profiles.csv
+ 16653575 drwx------  1000   1000      4096  7-Nov-2021 12:29 .individual programmer
+ 15475520 -rw-r--r--  1000   1000         0 22-Dec-2021 22:44 .xinitrc
+ 15470014 -rw-r--r--  1000   1000       537 14-Dec-2021 23:14 .Xresources.cyberpunk1
+ 15475483 -rw-r--r--  1000   1000       538 15-Dec-2021 00:23 .Xresources.cyberpunk3
+ 15469819 -rw-r--r--  1000   1000        76 23-Dec-2021 16:25 .gitconfig
+ 15475530 -rw-------  1000   1000       256 25-Dec-2021 17:06 .pulse-cookie
+
+dir_partition inode=15466505
+   P Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+Directory /cyberpunk/Documents
+ 15466505 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 .
+ 15466497 drwx--x---  1000   1000      4096 11-Jan-2022 15:14 ..
+ 15473416 -rw-r--r--  1000   1000    210197 14-Jun-2021 14:47 AdBlock.png
+ 15472619 drwxr-xr-x  1000   1000      4096  7-Sep-2021 13:22 LearnGo
+ 16778542 drwxr-xr-x  1000   1000      4096  7-Feb-2021 15:23 Caendra
+ 16910634 drwxr-xr-x  1000   1000      4096  2-Jun-2021 22:54 Curro
+ 15471402 drwxr-xr-x  1000   1000      4096 19-May-2021 20:49 CyberHunter
+ 15993706 drwxr-xr-x  1000   1000      4096  7-Oct-2021 19:59 ScriptsPentest
+ 16386496 drwxr-xr-x  1000   1000      4096 29-Nov-2021 01:00 Harley
+ 15471278 drwxr-xr-x  1000   1000      4096  2-Jan-2022 20:24 Repos
+ 15469410 drwxr-xr-x  1000   1000      4096 19-Sep-2021 22:14 OpenVPN
+ 15472658 drwxr-xr-x  1000   1000      4096 22-Oct-2021 18:44 Bugbounty
+ 20185976 drwxr-xr-x  1000   1000      4096  7-Oct-2021 08:26 HandsOnHacking
+ 15729967 drwxr-xr-x  1000   1000      4096 15-Apr-2021 09:19 Include
+ 18350210 drwxr-xr-x  1000   1000      4096 23-Mar-2021 15:52 InvestigacionOsint
+ 16520668 drwxr-xr-x  1000   1000      4096  4-Oct-2021 22:42 Dicctionaries
+ 18745598 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 BootCamps
+ 15470825 drwxr-xr-x  1000   1000      4096 22-Jun-2021 10:42 Pwnagotchi
+ 20316219 drwxr-xr-x  1000   1000      4096 23-Apr-2021 16:12 RegalosMama
+ 15470700 -rwxr-xr-x  1000   1000      2085  3-Feb-2021 22:03 Stuff.kdbx
+ 17694748 drwxr-xr-x  1000   1000      4096  2-Feb-2021 22:55 TelegramIP
+ 16777649 drwxr-xr-x  1000   1000      4096  6-Jan-2022 23:35 Test
+ 15474628 drwxr-xr-x  1000   1000      4096  5-Aug-2021 18:28 Datos
+ 15474066 drwxr-xr-x  1000   1000      4096 30-Nov-2021 11:50 Tools
+ 16778053 drwxr-xr-x  1000   1000      4096 14-Nov-2021 19:19 TryHackme
+ 15470954 drwxr-xr-x  1000   1000      4096 10-Jan-2022 00:10 VirtualMachines
+ 15993623 drwxr-xr-x  1000   1000      4096  5-Sep-2021 22:59 Notas
+ 22545603 drwxr-xr-x  1000   1000      4096 24-Nov-2021 19:04 Wifi
+
+dir_partition inode=15471278
+   P Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+Directory /cyberpunk/Documents/Repos
+ 15471278 drwxr-xr-x  1000   1000      4096  2-Jan-2022 20:24 .
+ 15466505 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 ..
+ 15471281 drwxr-xr-x  1000   1000      4096  1-Oct-2021 11:37 Gf-Patterns
+ 15471324 -rw-r--r--  1000   1000        41  2-Jan-2022 20:24 git_t.txt
+ 15729113 drwxr-xr-x  1000   1000      4096 26-Dec-2021 16:03 suck_less
+
+dir_partition inode=15729113
+   P Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+Directory /cyberpunk/Documents/Repos/suck_less
+ 15729113 drwxr-xr-x  1000   1000      4096 26-Dec-2021 16:03 .
+ 15471278 drwxr-xr-x  1000   1000      4096  2-Jan-2022 20:24 ..
+ 16646796 drwxr-xr-x  1000   1000      4096 11-Jan-2022 15:14 .git
+ 18096679 drwxr-xr-x  1000   1000      4096  7-Dec-2021 15:10 st
+ 15729154 -rw-r--r--  1000   1000        75 26-Dec-2021 11:48 README.md
+ 15729075 drwxr-xr-x  1000   1000      4096 11-Jan-2022 15:30 dwm
+
+dir_partition inode=15729075
+   P Linux filesys. data    216008704 2000409223 1784400520
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 913 GB / 850 GiB
+Directory /cyberpunk/Documents/Repos/suck_less/dwm
+ 15729075 drwxr-xr-x  1000   1000      4096 11-Jan-2022 15:30 .
+ 15729113 drwxr-xr-x  1000   1000      4096 26-Dec-2021 16:03 ..
+ 17046099 drwxr-xr-x  1000   1000      4096  2-Jan-2022 20:16 patches
+ 15729190 -rw-r--r--     0      0     12195 11-Jan-2022 15:33 testdisk.log
+Directory /cyberpunk/Documents/Repos/suck_less
+ 15729113 drwxr-xr-x  1000   1000      4096 26-Dec-2021 16:03 .
+ 15471278 drwxr-xr-x  1000   1000      4096  2-Jan-2022 20:24 ..
+ 16646796 drwxr-xr-x  1000   1000      4096 11-Jan-2022 15:14 .git
+ 18096679 drwxr-xr-x  1000   1000      4096  7-Dec-2021 15:10 st
+ 15729154 -rw-r--r--  1000   1000        75 26-Dec-2021 11:48 README.md
+ 15729075 drwxr-xr-x  1000   1000      4096 11-Jan-2022 15:30 dwm
+Directory /cyberpunk/Documents/Repos
+ 15471278 drwxr-xr-x  1000   1000      4096  2-Jan-2022 20:24 .
+ 15466505 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 ..
+ 15471281 drwxr-xr-x  1000   1000      4096  1-Oct-2021 11:37 Gf-Patterns
+ 15471324 -rw-r--r--  1000   1000        41  2-Jan-2022 20:24 git_t.txt
+ 15729113 drwxr-xr-x  1000   1000      4096 26-Dec-2021 16:03 suck_less
+Directory /cyberpunk/Documents
+ 15466505 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 .
+ 15466497 drwx--x---  1000   1000      4096 11-Jan-2022 15:14 ..
+ 15473416 -rw-r--r--  1000   1000    210197 14-Jun-2021 14:47 AdBlock.png
+ 15472619 drwxr-xr-x  1000   1000      4096  7-Sep-2021 13:22 LearnGo
+ 16778542 drwxr-xr-x  1000   1000      4096  7-Feb-2021 15:23 Caendra
+ 16910634 drwxr-xr-x  1000   1000      4096  2-Jun-2021 22:54 Curro
+ 15471402 drwxr-xr-x  1000   1000      4096 19-May-2021 20:49 CyberHunter
+ 15993706 drwxr-xr-x  1000   1000      4096  7-Oct-2021 19:59 ScriptsPentest
+ 16386496 drwxr-xr-x  1000   1000      4096 29-Nov-2021 01:00 Harley
+ 15471278 drwxr-xr-x  1000   1000      4096  2-Jan-2022 20:24 Repos
+ 15469410 drwxr-xr-x  1000   1000      4096 19-Sep-2021 22:14 OpenVPN
+ 15472658 drwxr-xr-x  1000   1000      4096 22-Oct-2021 18:44 Bugbounty
+ 20185976 drwxr-xr-x  1000   1000      4096  7-Oct-2021 08:26 HandsOnHacking
+ 15729967 drwxr-xr-x  1000   1000      4096 15-Apr-2021 09:19 Include
+ 18350210 drwxr-xr-x  1000   1000      4096 23-Mar-2021 15:52 InvestigacionOsint
+ 16520668 drwxr-xr-x  1000   1000      4096  4-Oct-2021 22:42 Dicctionaries
+ 18745598 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 BootCamps
+ 15470825 drwxr-xr-x  1000   1000      4096 22-Jun-2021 10:42 Pwnagotchi
+ 20316219 drwxr-xr-x  1000   1000      4096 23-Apr-2021 16:12 RegalosMama
+ 15470700 -rwxr-xr-x  1000   1000      2085  3-Feb-2021 22:03 Stuff.kdbx
+ 17694748 drwxr-xr-x  1000   1000      4096  2-Feb-2021 22:55 TelegramIP
+ 16777649 drwxr-xr-x  1000   1000      4096  6-Jan-2022 23:35 Test
+ 15474628 drwxr-xr-x  1000   1000      4096  5-Aug-2021 18:28 Datos
+ 15474066 drwxr-xr-x  1000   1000      4096 30-Nov-2021 11:50 Tools
+ 16778053 drwxr-xr-x  1000   1000      4096 14-Nov-2021 19:19 TryHackme
+ 15470954 drwxr-xr-x  1000   1000      4096 10-Jan-2022 00:10 VirtualMachines
+ 15993623 drwxr-xr-x  1000   1000      4096  5-Sep-2021 22:59 Notas
+ 22545603 drwxr-xr-x  1000   1000      4096 24-Nov-2021 19:04 Wifi
+Directory /cyberpunk
+ 15466497 drwx--x---  1000   1000      4096 11-Jan-2022 15:14 .
+       2 drwxr-xr-x     0      0      4096 27-Dec-2020 21:33 ..
+ 15466498 -rw-r--r--  1000   1000        57 20-Dec-2020 19:44 .bash_profile
+ 15472755 -rw-r--r--  1000   1000      5836 17-May-2021 07:08 .bashrc
+ 15466500 -rw-r--r--  1000   1000        21 20-Dec-2020 19:44 .bash_logout
+ 15466501 drwxr-xr-x  1000   1000      4096 25-Dec-2021 17:03 Desktop
+ 15466502 drwxr-xr-x  1000   1000      4096 10-Jan-2022 17:44 Downloads
+ 15466503 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:36 Templates
+ 15466504 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:36 Public
+ 15466505 drwxr-xr-x  1000   1000      4096 18-Dec-2021 21:00 Documents
+ 15466506 drwxr-xr-x  1000   1000      4096  7-Jan-2022 13:01 Music
+ 15466507 drwxr-xr-x  1000   1000      4096 24-Apr-2021 17:28 Pictures
+ 15466508 drwxr-xr-x  1000   1000      4096 10-Jan-2022 22:13 Videos
+ 15466509 drwx------  1000   1000      4096 10-Jan-2022 18:52 .config
+ 15466512 -rw-------  1000   1000      7989 13-Dec-2021 21:13 .bash_history
+ 16646869 drwx------  1000   1000      4096 28-Dec-2020 21:18 .icons
+ 15466621 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:45 yay
+ 15466810 drwxr-xr-x  1000   1000      4096  8-Jan-2022 18:40 .cache
+ 15469487 drwxr-xr-x  1000   1000      4096 27-Dec-2020 21:49 .subversion
+ 15469491 drwx------  1000   1000      4096 27-Dec-2021 20:10 .local
+ 15469917 drwxr-xr-x  1000   1000      4096  2-Jan-2022 19:31 .vim
+ 15859781 drwxr-xr-x  1000   1000      4096  6-Jan-2022 17:02 .w3m
+ 15475498 -rw-r--r--  1000   1000       815 18-Dec-2021 22:12 .tmux.conf
+ 15470020 -rw-r--r--  1000   1000       538 15-Dec-2021 00:12 .Xresources
+ 15859818 drwxr-xr-x  1000   1000      4096 16-Oct-2021 20:28 backgrounds
+ 15859903 drwxr-xr-x  1000   1000      4096  2-Jan-2021 18:19 go
+ 15470704 -rw-r--r--  1000   1000         0 27-Dec-2020 22:17 .lyxauth
+ 15470718 -rwxr-xr--  1000   1000      1055 11-Jan-2022 15:30 .fehbg
+ 16517568 drwx------  1000   1000      4096 28-Dec-2020 20:33 .mozilla
+ 15470722 -rw-r--r--  1000   1000      1382 28-Dec-2020 20:43 .taskrc
+ 16518048 drwxr-xr-x  1000   1000      4096 28-Dec-2020 21:56 .task
+ 15472981 -rw-------  1000   1000     33613 11-Jan-2022 15:14 .viminfo
+ 15470724 drwxr-xr-x  1000   1000      4096 26-Oct-2021 18:05 .ZAP
+ 16254642 drwxr-xr-x  1000   1000      4096 28-Dec-2020 21:06 .java
+ 16647399 drwx------  1000   1000      4096  2-Jan-2021 16:47 .pki
+ 16777217 drwx------  1000   1000      4096 26-Dec-2021 12:03 .gnupg
+ 15470192 -rw-r--r--  1000   1000       576 20-Mar-2021 23:10 .gtkrc-2.0
+ 16779291 drwxr-xr-x  1000   1000      4096  2-Jan-2021 18:20 .cargo
+ 15472880 -rw-------  1000   1000       647  9-Jan-2022 19:57 .lesshst
+ 16777319 drwxr-xr-x  1000   1000      4096 10-Jan-2022 18:49 VirtualBox VMs
+ 16777343 drwxr-xr-x  1000   1000      4096 11-Jan-2021 15:00 .bully
+ 16777360 drwx------  1000   1000      4096 11-Jan-2021 22:37 .thunderbird
+ 16777735 drwxr-x---  1000   1000      4096 14-Jan-2021 20:16 .android
+ 16777559 drwxr-xr-x  1000   1000      4096 16-Jan-2021 16:46 .Genymobile
+ 16778751 drwxr-xr-x  1000   1000      4096  9-Feb-2021 22:24 .maltego
+ 16778417 drwx------  1000   1000      4096  4-Aug-2021 15:40 .hashcat
+ 16647202 drwx------  1000   1000      4096 19-Dec-2021 04:19 .john
+ 15469781 -rw-------  1000   1000      1033 25-Sep-2021 20:24 .python_history
+ 16778966 drwx------  1000   1000      4096  1-Mar-2021 21:11 .purple
+ 16777666 drwxr-xr-x  1000   1000      4096 15-Mar-2021 20:26 .parallel
+ 15470183 -rw-r--r--  1000   1000       638 11-Jan-2022 10:00 .wget-hsts
+ 19529896 drwx------  1000   1000      4096 20-Mar-2021 00:48 .BurpSuite
+ 16656301 drwx------  1000   1000      4096 23-Mar-2021 17:04 .ngrok2
+ 16656305 drwx------  1000   1000      4096  5-Oct-2021 18:29 .ssh
+ 19661286 drwxr-xr-x  1000   1000      4096 24-Mar-2021 08:26 .beef
+ 15470254 drwxr-xr-x  1000   1000      4096 24-Mar-2021 10:43 .msf4
+ 16123887 drwxr-xr-x  1000   1000      4096 15-Apr-2021 13:19 .wpscan
+ 15471457 drwxr-xr-x  1000   1000      4096 20-Apr-2021 08:23 .node-gyp
+ 15471977 drwxr-xr-x  1000   1000      4096 26-Dec-2021 11:52 .npm
+ 15599227 drwxr-xr-x  1000   1000      4096  2-Jul-2021 16:23 .electron-gyp
+ 16649224 drwxr-xr-x  1000   1000      4096 21-Apr-2021 09:50 .cme
+ 15469131 drwxr-xr-x  1000   1000      4096  5-Oct-2021 18:59 nuclei-templates
+ 15471274 drwxr-xr-x  1000   1000      4096 22-Oct-2021 19:14 .gf
+ 15469946 -rw-------  1000   1000        65  2-Jul-2021 15:54 .npmrc
+ 15469734 -rw-r--r--  1000   1000       839 21-Dec-2021 17:16 .Xresources.bak
+ 15472214 -rw-r--r--  1000   1000    705279  7-Oct-2021 10:00 nuclei_tp_db.json
+ 15476903 drwx------  1000   1000      4096 16-Oct-2021 12:48 .pentadactyl
+ 15473731 -rw-r--r--  1000   1000       139  5-Jul-2021 16:43 index.theme
+ 15473744 -rw-r--r--  1000   1000       281  5-Jul-2021 16:57 .zprofile
+ 15472002 drwx------  1000   1000      4096  3-Nov-2021 10:09 .zoom
+ 15469789 -rw-r-----  1000   1000         0 27-Oct-2021 12:44 .gksu.lock
+ 15470295 drwxr-xr-x  1000   1000      4096  6-Aug-2021 15:10 .recon-ng
+ 15476933 -rw-r--r--  1000   1000       112 16-Oct-2021 12:55 .pentadactylrc
+ 15993764 drwxr-xr-x     0      0      4096  7-Sep-2021 21:03 hs
+ 15476839 drwx------  1000   1000      4096 14-Oct-2021 23:46 .moonchild productions
+ 15473434 -rw-r--r--  1000   1000       157  4-Nov-2021 07:31 profiles.csv
+ 16653575 drwx------  1000   1000      4096  7-Nov-2021 12:29 .individual programmer
+ 15475520 -rw-r--r--  1000   1000         0 22-Dec-2021 22:44 .xinitrc
+ 15470014 -rw-r--r--  1000   1000       537 14-Dec-2021 23:14 .Xresources.cyberpunk1
+ 15475483 -rw-r--r--  1000   1000       538 15-Dec-2021 00:23 .Xresources.cyberpunk3
+ 15469819 -rw-r--r--  1000   1000        76 23-Dec-2021 16:25 .gitconfig
+ 15475530 -rw-------  1000   1000       256 25-Dec-2021 17:06 .pulse-cookie
+Directory /
+       2 drwxr-xr-x     0      0      4096 27-Dec-2020 21:33 .
+       2 drwxr-xr-x     0      0      4096 27-Dec-2020 21:33 ..
+      11 drwx------     0      0     16384 27-Dec-2020 21:19 lost+found
+ 15466497 drwx--x---  1000   1000      4096 11-Jan-2022 15:14 cyberpunk
+
+interface_write()
+ 1 P EFI System                  2048    2099199    2097152 [EFI System Partition] [NO NAME]
+ 2 P Linux filesys. data      2099200  211814399  209715200
+ 3 P Linux Swap             211814400  216008687    4194288
+ 4 P Linux filesys. data    216008704 2000409223 1784400520
+simulate write!
+
+TestDisk exited normally.
